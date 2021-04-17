@@ -13,7 +13,8 @@ class CsvRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        // yo cambiaria como funciona mucho lo del rol dependiendo del proyecto, usando permisos en db por usuario, o gestion por temporarias o oauth sin problemas :)
+        return session()->get('role') === 'admin';
     }
 
     /**

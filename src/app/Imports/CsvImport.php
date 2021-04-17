@@ -11,6 +11,13 @@ use Maatwebsite\Excel\Concerns\WithCustomCsvSettings;
 
 class CsvImport implements ToModel, WithCustomCsvSettings, WithChunkReading, WithBatchInserts
 {
+    protected $session_id;
+
+    public function __construct($session_id)
+    {
+        $this->session_id = $session_id;
+    }
+
     /**
     * @param array $row
     *
@@ -26,7 +33,7 @@ class CsvImport implements ToModel, WithCustomCsvSettings, WithChunkReading, Wit
 
         return new Csv([
             'id' => $row[0],
-            'session_id' => session()->getId(),
+            'session_id' => $this->session_id,
             'zone' => $row[1],
             'from' => $row[2],
             'to' => $row[3],

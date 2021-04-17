@@ -3,13 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CsvRequest;
-use App\Imports\CsvImport;
-use App\Repositories\CsvExaminerRepository;
 use App\Repositories\LiveStatusRepository;
 use App\Services\FileService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Maatwebsite\Excel\Facades\Excel;
 
 class FileController extends Controller
 {
@@ -24,7 +19,7 @@ class FileController extends Controller
     {
         $this->fileService->process($request);
 
-        return redirect()->route('details');
+        return redirect()->route('list');
     }
 
     public function getProccessStatus()

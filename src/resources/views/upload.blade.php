@@ -14,28 +14,22 @@
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <div class="row">
-                <h1>Selecciona tipo usuario</h1>
+                <h1>Importador de archivo csv con laravel</h1>
             </div>
             <hr>
             <div class="row">
-                <form method="post" action="{{route('set-role')}}" enctype="multipart/form-data">
+                <form method="post" action="{{route('upload-file')}}" enctype="multipart/form-data">
                     {{ csrf_field() }}
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="role" id="role1" value="admin" checked>
-                        <label class="form-check-label" for="role1">
-                            Admin
-                        </label>
+                    <div class="form-outline mb-4">
+                        <input type="file" id="csvImporter" name="csv" class="form-control" />
+                        <label class="form-label" for="csvImporter">Csv importer</label>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="role" id="role2" value="client">
-                        <label class="form-check-label" for="role2">
-                            Otro
-                        </label>
-                    </div>
-
                     <button type="submit" class="btn btn-primary btn-block">Upload</button>
                 </form>
+            </div>
+            <hr>
+            <div class="row">
+                <h5>Descargar ejemplo: <a href="{{url('files/example.csv')}}">Ejemplo.csv</a></h5>
             </div>
         </div>
     </div>

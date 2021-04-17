@@ -22,7 +22,7 @@ Copiar el archivo .env.example a .env <br/>
 Levantar la db correctamente: <br/>
 
 * `docker-compose exec php artisan migrate`
-* `docker-compose exec php artisan queue:work`
+* `docker-compose exec php artisan queue:work` O en su defecto si prefiere corrarlo una sola vez utilize `docker-compose exec php artisan queue:work --once`
 
 Y listo, no cierre la consola con el worker corriendo, abrir localhost en el puerto normal 80 y ya tenes todo levantado :) <br/>
 <a href="http://localhost">Localhost</a>

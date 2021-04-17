@@ -15,19 +15,19 @@ class FileService
     {
     }
 
+    /**
+     * @param $request
+     * @throws \Exception
+     */
     public function process($request): void
     {
-        $status = $this->liveStatusRepository->getStatus();
-        if ($status !== null && $status !== LiveStatus::$FINISHED)
-        {
-            return;
-        }
+        session()->put('hash', md5(session()->getId().random_int(0, 9999)));
 
-        $request->file('csv')->storeAs('files', session()->getId().'.csv');
+        $request->file('csv')->storeAs('files', session()->get('hash').'.csv');
 
         LiveStatus::create([
             'status' => LiveStatus::$STARTING,
-            'session_id' => session()->getId()
+            'session_id' => session()->get('hash')
         ]);
 
         ProcessCsv::dispatch();

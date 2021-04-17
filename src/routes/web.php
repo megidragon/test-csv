@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [PageController::class, 'home'])->name('home');
-Route::get('/details', [PageController::class, 'details'])->name('details');
+Route::get('/upload', [PageController::class, 'upload'])->name('upload');
+Route::get('/list', [PageController::class, 'list'])->name('list');
+Route::get('/details/{sid}', [PageController::class, 'details'])->name('details');
 
-Route::post('/upload-file', [FileController::class, 'uploadCsv'])->name('upload');
+Route::post('/set-role', [PageController::class, 'setRole'])->name('set-role');
+Route::post('/upload-file', [FileController::class, 'uploadCsv'])->name('upload-file');

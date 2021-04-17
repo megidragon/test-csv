@@ -6,9 +6,15 @@ use App\Models\LiveStatus;
 
 class LiveStatusRepository
 {
-    public function getStatus()
+    public function getStatus($sid)
     {
-        $data = LiveStatus::where('session_id', session()->getId())->first();
+        $data = LiveStatus::where('session_id', $sid)->first();
         return !empty($data) ? $data->status : null;
+    }
+
+    public function getList()
+    {
+        $data = LiveStatus::all();
+        return !empty($data) ? $data : [];
     }
 }
