@@ -1,0 +1,61 @@
+version: '3'
+
+networks:
+  test:
+
+services:
+  nginx:
+    restart: unless-stopped
+    image: nginx:alpine
+    container_name: test-webserver
+    tty: true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./src:/var/www/html
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/logs:/var/log/nginx
+    depends_on:
+      - php
+    networks:
+      - test
+
+  php:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: ./docker/php.dockerfile
+    container_name: test-php
+    volumes:
+      - ./src:/var/www/html
+      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    ports:
+      - "9000:9000"
+    networks:
+      - test
+
+  mysql:
+    image: mysql:5.7.22
+    container_name: test-mysql
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "4306:3306"
+    volumes:
+      - ~/docker/delivery:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: homestead
+      MYSQL_USER: homestead
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: secret
+      SERVICE_TAG: dev
+      SERVICE_NAME: mysql
+    networks:
+      - test
+
+volumes:
+  php:
+    driver: "local"
+  nginx:
+    driver: "local"

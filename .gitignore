@@ -1,0 +1,3 @@
+.idea
+nginx/logs/*
+!nginx/logs/.gitkeep
